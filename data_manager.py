@@ -26,15 +26,19 @@ class DataManager:
         return response['locations'][0]['city']['code']
     
     def insert_iata(self):
-        sheet_values = {
-            'prices': [
-                {'city': 'Mumbai', 'iataCode': '', 'lowestPrice': 3000, 'id': 2}, 
-                {'city': 'Bangalore', 'iataCode': '', 'lowestPrice': 3000, 'id': 3},
-                {'city': 'Delhi', 'iataCode': '', 'lowestPrice': 2000, 'id': 4}, 
-                {'city': 'Hyderabad', 'iataCode': '', 'lowestPrice': 3000, 'id': 5}
-                ]
+        sheet_values = self.read_from_sheet()
+        body = {
+            "price": {
+                "iataCode": None
             }
-        
+        }
         for city in sheet_values['prices']:
-            iata = self.get_iata(city['city'])
+            if city['iataCode'] == '':
+                iata = self.get_iata(city['city'])
+                # put iata to sheety
+                body['price']['iataCode'] = iata
+                response = requests.put(url=f"{self.sheety_url}/{city['id']}", headers=self.sheety_header, json=body)
+                response.raise_for_status
+                print(response.text)
+        
             
