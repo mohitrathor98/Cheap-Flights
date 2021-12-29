@@ -8,28 +8,33 @@ class FlightSearch:
         self.tequila_header = {"apikey": "e4X5g2dGr4YXwfUgIbAs92hVwAPhS7e0"}
         
     def get_iata(self, city):
+        
         query = {
             "term": city,
-            "location_types": "airport",
-            "limit": 5
+            "location_types": "airport"
         }
         response = requests.get(url=f"{self.tequila_url}/locations/query", headers=self.tequila_header, params=query)
         response.raise_for_status
         response = response.json()
-        return response['locations'][0]['city']['code']
+
+        for location in response['locations']:
+            if location['timezone'] == "Asia/Kolkata":
+                return location['city']['code']
     
     def search_flights(self, dest):
-        
+
         tomorrow = datetime.now() + timedelta(1)
         six_months = datetime.now() + timedelta(180)
         query = {
             "fly_from": "PAT",
             "fly_to": dest,
             "date_from": tomorrow.strftime("%d/%m/%Y"),
-            "date_to": six_months.strftime("%d/%m/%Y")
+            "date_to": six_months.strftime("%d/%m/%Y"),
+            "curr": "INR",
+            "partner_market": "in"
         }
         url = f"{self.tequila_url}/v2/search"
         response = requests.get(url=url, headers=self.tequila_header, params=query)
         response.raise_for_status
-        with open('data.json', "w+") as file:
+        with open(f'data_{dest}.json', "w+") as file:
             json.dump(response.json(), file, indent=4)
