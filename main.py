@@ -2,4 +2,4 @@
 from data_manager import DataManager
 
 spreadsheet = DataManager()
-print(spreadsheet.read_from_sheet())
+print(spreadsheet.insert_iata())
