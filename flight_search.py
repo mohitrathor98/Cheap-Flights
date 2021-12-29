@@ -34,4 +34,4 @@ class FlightSearch:
             response = requests.get(url=url, headers=self.tequila_header, params=query)
             response.raise_for_status
             with open('data.json', "w+") as file:
-                json.dump(response.json(), file)
+                json.dump(response.json(), file, indent=4)
