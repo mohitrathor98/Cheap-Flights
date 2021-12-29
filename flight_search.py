@@ -18,20 +18,18 @@ class FlightSearch:
         response = response.json()
         return response['locations'][0]['city']['code']
     
-    def search_flights(self, sheet_data):
+    def search_flights(self, dest):
         
         tomorrow = datetime.now() + timedelta(1)
         six_months = datetime.now() + timedelta(180)
         query = {
             "fly_from": "PAT",
-            "fly_to": None,
+            "fly_to": dest,
             "date_from": tomorrow.strftime("%d/%m/%Y"),
             "date_to": six_months.strftime("%d/%m/%Y")
         }
         url = f"{self.tequila_url}/v2/search"
-        for city in sheet_data['prices']:
-            query["fly_to"] = city['iataCode']
-            response = requests.get(url=url, headers=self.tequila_header, params=query)
-            response.raise_for_status
-            with open('data.json', "w+") as file:
-                json.dump(response.json(), file, indent=4)
+        response = requests.get(url=url, headers=self.tequila_header, params=query)
+        response.raise_for_status
+        with open('data.json', "w+") as file:
+            json.dump(response.json(), file, indent=4)
