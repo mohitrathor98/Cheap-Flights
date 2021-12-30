@@ -9,10 +9,10 @@ class FlightData:
         self.notifi_api = NotificationManager()
     
     
-    def compare_prices(self, flight_data):
+    def compare_prices(self, flight_data, cutoff_price):
         
         for data in flight_data:
-            if data['price'] < 3000 and len(data['route']) == 1:
+            if data['price'] < cutoff_price and len(data['route']) == 1:
                 day = data['local_departure'].split('T')
                 day = day[0]
                 self.notifi_api.send_notification({ 
@@ -26,9 +26,6 @@ class FlightData:
                 break
 
     def check_prices(self, sheet_data):
-        # TODO:
-        # do sheet_data['prices'] here
-        # in search_flights do city['iataCode']
-        for city in sheet_data:
-            flight_data = self.flight_api.search_flights(city)
-            self.compare_prices(flight_data)
+        for city in sheet_data['prices']:
+            flight_data = self.flight_api.search_flights(city['iataCode'])
+            self.compare_prices(flight_data, city['lowestPrice'])

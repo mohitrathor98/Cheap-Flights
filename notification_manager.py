@@ -1,6 +1,4 @@
 from datetime import date
-import requests
-import json
 ***REMOVED***
 
 ***REMOVED***

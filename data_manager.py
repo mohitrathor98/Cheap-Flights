@@ -10,8 +10,6 @@ class DataManager:
         self.sheet_data = None
         
     def read_from_sheet(self):
-        #{'prices': [{'city': 'Mumbai', 'iataCode': '', 'lowestPrice': 3000, 'id': 2}, {'city': 'Bangalore', 'iataCode': '', 'lowestPrice': 3000, 'id': 3},
-        # {'city': 'Delhi', 'iataCode': '', 'lowestPrice': 2000, 'id': 4}, {'city': 'Hyderabad', 'iataCode': '', 'lowestPrice': 3000, 'id': 5}]}
         response = requests.get(url=self.sheety_url, headers=self.sheety_header)
         response.raise_for_status
         self.sheet_data = response.json()
