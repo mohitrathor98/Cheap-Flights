@@ -8,12 +8,12 @@ class FlightData:
     
     
     def compare_prices(self, flight_data):
+        
         for data in flight_data:
-            print(f"{data['cityTo']} : {data['price']}", end=' ')
-            if len(data['route']) > 1:
-                print("connecting")
-    ***REMOVED***
-                print()
+            if data['price'] < 5000 and len(data['route']) == 1:
+                date_time = data['local_departure'].split('T')
+                date_time = date_time[0] + " " + date_time[1][:-5]
+                print(f"{data['cityFrom']} : {data['cityCodeFrom']} : {data['cityTo']} : {data['cityCodeTo']} : {data['price']} : {date_time}")
             
 
     def check_prices(self, sheet_data):

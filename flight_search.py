@@ -34,6 +34,9 @@ class FlightSearch:
             "partner_market": "in"
         }
         url = f"{self.tequila_url}/v2/search"
-        response = requests.get(url=url, headers=self.tequila_header, params=query)
-        response.raise_for_status
-        return response.json()['data']
+        #response = requests.get(url=url, headers=self.tequila_header, params=query)
+        #response.raise_for_status
+        #return response.json()['data']
+        with open(f"data_{dest}.json", "r") as file:
+            data = json.load(file)
+        return data['data']
