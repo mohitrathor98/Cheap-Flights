@@ -4,7 +4,6 @@ import json
 ***REMOVED***
 
 ***REMOVED***
-    # SMS API
 ***REMOVED***
 ***REMOVED***
         self.sid = "ACee548b3d3a3ca065d5d5b9fb1365b68a"
@@ -18,4 +17,6 @@ import json
 
     def send_notification(self, message_dict):
         message = self.create_message(message_dict)
-        print(message)
+        client = Client(self.sid, self.token)
+        response = client.messages.create(body=message, from_=self.from_num, to=self.to_num)
+        print(response)

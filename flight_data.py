@@ -12,10 +12,17 @@ class FlightData:
     def compare_prices(self, flight_data):
         
         for data in flight_data:
-            if data['price'] < 4000 and len(data['route']) == 1:
+            if data['price'] < 3000 and len(data['route']) == 1:
                 day = data['local_departure'].split('T')
                 day = day[0]
-                self.notifi_api.send_notification({ "dep_city":data['cityFrom'], "dep_city_code":data['cityCodeFrom'], "dest_city":data['cityTo'], "dest_city_code":data['cityCodeTo'], "price":data['price'], "day":day })
+                self.notifi_api.send_notification({ 
+                    "dep_city":data['cityFrom'], 
+                    "dep_city_code":data['cityCodeFrom'], 
+                    "dest_city":data['cityTo'], 
+                    "dest_city_code":data['cityCodeTo'], 
+                    "price":data['price'], 
+                    "day":day 
+                })
                 break
 
     def check_prices(self, sheet_data):
