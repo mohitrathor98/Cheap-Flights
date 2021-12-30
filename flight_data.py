@@ -1,20 +1,22 @@
 from flight_search import FlightSearch
+from notification_manager import NotificationManager
 
 
 class FlightData:
     #This class is responsible for structuring the flight data.
 ***REMOVED***
         self.flight_api = FlightSearch()
+        self.notifi_api = NotificationManager()
     
     
     def compare_prices(self, flight_data):
         
         for data in flight_data:
-            if data['price'] < 5000 and len(data['route']) == 1:
-                date_time = data['local_departure'].split('T')
-                date_time = date_time[0] + " " + date_time[1][:-5]
-                print(f"{data['cityFrom']} : {data['cityCodeFrom']} : {data['cityTo']} : {data['cityCodeTo']} : {data['price']} : {date_time}")
-            
+            if data['price'] < 4000 and len(data['route']) == 1:
+                day = data['local_departure'].split('T')
+                day = day[0]
+                self.notifi_api.send_notification({ "dep_city":data['cityFrom'], "dep_city_code":data['cityCodeFrom'], "dest_city":data['cityTo'], "dest_city_code":data['cityCodeTo'], "price":data['price'], "day":day })
+                break
 
     def check_prices(self, sheet_data):
         # TODO:
