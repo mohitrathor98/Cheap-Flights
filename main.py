@@ -5,8 +5,6 @@ from flight_data import FlightData
 # export all the tokens and ids in form of string dictionary
 # and use json.loads to convert it back
 
-# ask user departure city name
-
 # make for foreign flights
 # make for connecting flights
 spreadsheet = DataManager()
@@ -34,8 +32,9 @@ if choice == "1":
         print("You're registered.")
         
 elif choice == "2":    
+    dept_city = input("Enter departure city: ")
     print("Running search....")
     spreadsheet.insert_iata()
-    flight.check_prices(spreadsheet.flight_sheet_data, spreadsheet.user_data)
+    flight.check_prices(dept_city, spreadsheet.flight_sheet_data, spreadsheet.user_data)
 
 

@@ -20,12 +20,12 @@ class FlightSearch:
             if location['timezone'] == "Asia/Kolkata":
                 return location['city']['code']
     
-    def search_flights(self, dest):
+    def search_flights(self, dept, dest):
 
         tomorrow = datetime.now() + timedelta(1)
         six_months = datetime.now() + timedelta(180)
         query = {
-            "fly_from": "PAT",
+            "fly_from": dept,
             "fly_to": dest,
             "date_from": tomorrow.strftime("%d/%m/%Y"),
             "date_to": six_months.strftime("%d/%m/%Y"),

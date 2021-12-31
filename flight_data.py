@@ -29,7 +29,8 @@ class FlightData:
             # no flight data is present
 ***REMOVED***
 
-    def check_prices(self, sheet_data, user_data):
+    def check_prices(self, dept_city, sheet_data, user_data):
+        dept_city_code = self.flight_api.get_iata(dept_city)
         for city in sheet_data['prices']:
-            flight_data = self.flight_api.search_flights(city['iataCode'])
+            flight_data = self.flight_api.search_flights(dept_city_code, city['iataCode'])
             self.compare_prices(flight_data, city['lowestPrice'], user_data) 
