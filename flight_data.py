@@ -25,9 +25,9 @@ class FlightData:
                         "day":day 
                     })
                     break
-        except:
+***REMOVED***
             # no flight data is present
-            pass
+***REMOVED***
 
     def check_prices(self, sheet_data):
         for city in sheet_data['prices']:
