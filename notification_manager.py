@@ -13,20 +13,20 @@
 ***REMOVED***
 ***REMOVED***
 
-    def send_mails(self, message, dest_city):
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
                 connection.login(user="mohitdemo7@gmail.com", password="asdf1234()")
 ***REMOVED***
-                    from_addr="mohitdemo7@gmail.com", 
-                    to_addrs="mohitrathor8@gmail.com", 
-                    msg=f"Subject:Flight to {dest_city}\n\n{message}"
+                    from_addr = "mohitdemo7@gmail.com", 
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 
-    def send_notification(self, message_dict):
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -37,4 +37,5 @@
 ***REMOVED***
         
 ***REMOVED***
-        self.send_mails(message, message_dict['dest_city'])
+***REMOVED***
+***REMOVED***

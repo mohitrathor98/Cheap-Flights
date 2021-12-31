@@ -8,24 +8,31 @@ class DataManager:
         self.sheety_url = "https://api.sheety.co/407a967edb3e231ee6c7f637d95bbfb6/flightDeals"
         self.sheety_header = { "Authorization": "Bearer igotyoumoonlightyouremystarlight21323cmmondancewithme" }
         self.flight_api = FlightSearch()
-        self.sheet_data = None
+        self.flight_sheet_data = None
+        self.user_data = None
         
-    def read_from_sheet(self):
+    def read_flight_data(self):
         response = requests.get(url=f"{self.sheety_url}/prices", headers=self.sheety_header)
         response.raise_for_status
-        self.sheet_data = response.json()
+        self.flight_sheet_data = response.json()
+    
+    def get_user_data(self):
+        response = requests.get(url=f"{self.sheety_url}/users", headers=self.sheety_header)
+        response.raise_for_status
+        self.user_data = response.json()
     
     def insert_iata(self):
-        self.read_from_sheet()
+        self.read_flight_data()
+        self.get_user_data()
         body = {
             "price": {
                 "iataCode": None
             }
         }
-        for index,city in enumerate(self.sheet_data['prices']):
+        for index,city in enumerate(self.flight_sheet_data['prices']):
             if city['iataCode'] == '':
                 iata = self.flight_api.get_iata(city['city'])
-                self.sheet_data['prices'][index]['iataCode'] = iata
+                self.flight_sheet_data['prices'][index]['iataCode'] = iata
                 
                 # put iata to sheety
                 body['price']['iataCode'] = iata
@@ -43,4 +50,3 @@ class DataManager:
         response = requests.post(url=f"{self.sheety_url}/users", headers=self.sheety_header, json=body)
         response.raise_for_status
         
-            

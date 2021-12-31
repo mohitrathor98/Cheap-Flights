@@ -34,7 +34,8 @@ if choice == "1":
         print("You're registered.")
         
 elif choice == "2":    
+    print("Running search....")
     spreadsheet.insert_iata()
-    flight.check_prices(spreadsheet.sheet_data)
+    flight.check_prices(spreadsheet.flight_sheet_data, spreadsheet.user_data)
 
 
