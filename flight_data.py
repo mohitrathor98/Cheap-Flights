@@ -4,14 +4,14 @@ from notification_manager import NotificationManager
 
 class FlightData:
     #This class is responsible for structuring the flight data.
-***REMOVED***
+    def __init__(self) -> None:
         self.flight_api = FlightSearch()
         self.notifi_api = NotificationManager()
     
     
     def compare_prices(self, flight_data, cutoff_price, user_data):
         
-***REMOVED***
+        try:
             for data in flight_data:
                 if data['price'] < cutoff_price:
                     connecting = False
@@ -34,9 +34,9 @@ class FlightData:
                     }, user_data)
                     break
                 
-***REMOVED***
+        except Exception as e:
             # no flight data is present
-***REMOVED***
+            print(e)
 
     def check_prices(self, dept_city, sheet_data, user_data):
         for city in sheet_data['prices']:

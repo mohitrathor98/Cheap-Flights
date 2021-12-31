@@ -2,9 +2,9 @@ import requests
 from datetime import datetime,timedelta
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
-***REMOVED***
+    def __init__(self) -> None:
         self.tequila_url = "https://tequila-api.kiwi.com"
-        self.tequila_header = {"apikey": "e4X5g2dGr4YXwfUgIbAs92hVwAPhS7e0"}
+        self.tequila_header = {"apikey": "YOUR TEQUILA TOKEN"}
         
     def get_iata(self, city):
         

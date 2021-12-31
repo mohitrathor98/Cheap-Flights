@@ -4,9 +4,9 @@ import requests
 from flight_search import FlightSearch
 class DataManager:
     # interacting with sheety apis
-***REMOVED***
-        self.sheety_url = "https://api.sheety.co/407a967edb3e231ee6c7f637d95bbfb6/flightDeals"
-        self.sheety_header = { "Authorization": "Bearer igotyoumoonlightyouremystarlight21323cmmondancewithme" }
+    def __init__(self) -> None:
+        self.sheety_url = "URL FOR SHEETY SPREADSHEET"
+        self.sheety_header = { "Authorization": "Bearer SHEETY_TOKEN" }
         self.flight_api = FlightSearch()
         self.flight_sheet_data = None
         self.user_data = None
