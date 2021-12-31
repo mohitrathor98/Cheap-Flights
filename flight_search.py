@@ -17,7 +17,7 @@ class FlightSearch:
         response = response.json()
 
         for location in response['locations']:
-            if location['timezone'] == "Asia/Kolkata":
+            if location['city']['name'] == city.title():
                 return location['city']['code']
     
     def search_flights(self, dept, dest):

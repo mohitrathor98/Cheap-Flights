@@ -4,9 +4,6 @@ from flight_data import FlightData
 # TODO:
 # export all the tokens and ids in form of string dictionary
 # and use json.loads to convert it back
-
-# make for foreign flights
-# make for connecting flights
 spreadsheet = DataManager()
 flight = FlightData()
 
