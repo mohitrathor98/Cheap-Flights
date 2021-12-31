@@ -30,7 +30,8 @@ class FlightSearch:
             "date_from": tomorrow.strftime("%d/%m/%Y"),
             "date_to": six_months.strftime("%d/%m/%Y"),
             "curr": "INR",
-            "partner_market": "in"
+            "partner_market": "in",
+            "max_stopovers": 2
         }
         url = f"{self.tequila_url}/v2/search"
         response = requests.get(url=url, headers=self.tequila_header, params=query)

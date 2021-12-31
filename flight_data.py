@@ -13,7 +13,13 @@ class FlightData:
         
 ***REMOVED***
             for data in flight_data:
-                if data['price'] < cutoff_price and len(data['route']) == 1:
+                if data['price'] < cutoff_price:
+                    connecting = False
+                    stoppage = None
+                    if len(data['route']) > 1:
+                        connecting = True
+                        stoppage = data['route'][0]["cityTo"]
+                    
                     day = data['local_departure'].split('T')
                     day = day[0]
                     self.notifi_api.send_notification({ 
@@ -22,15 +28,17 @@ class FlightData:
                         "dest_city":data['cityTo'], 
                         "dest_city_code":data['cityCodeTo'], 
                         "price":data['price'], 
-                        "day":day 
+                        "day":day ,
+                        "connecting": connecting,
+                        "stoppage": stoppage
                     }, user_data)
                     break
+                
 ***REMOVED***
             # no flight data is present
 ***REMOVED***
 
     def check_prices(self, dept_city, sheet_data, user_data):
-        dept_city_code = self.flight_api.get_iata(dept_city)
         for city in sheet_data['prices']:
-            flight_data = self.flight_api.search_flights(dept_city_code, city['iataCode'])
+            flight_data = self.flight_api.search_flights(dept_city, city['iataCode'])
             self.compare_prices(flight_data, city['lowestPrice'], user_data) 

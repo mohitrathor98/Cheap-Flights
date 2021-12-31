@@ -32,7 +32,7 @@ if choice == "1":
         print("You're registered.")
         
 elif choice == "2":    
-    dept_city = input("Enter departure city: ")
+    dept_city = input("Enter departure city iata code: ")
     print("Running search....")
     spreadsheet.insert_iata()
     flight.check_prices(dept_city, spreadsheet.flight_sheet_data, spreadsheet.user_data)
